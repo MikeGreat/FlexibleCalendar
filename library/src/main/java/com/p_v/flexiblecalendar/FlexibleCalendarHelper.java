@@ -7,6 +7,7 @@ import java.text.DateFormatSymbols;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * @author p-v
@@ -67,6 +68,17 @@ public class FlexibleCalendarHelper {
      */
     public static Calendar getLocalizedCalendar(Context context){
         return Calendar.getInstance(getLocale(context));
+    }
+
+    public static Calendar getCalendarInstance(String timeZone){
+        return Calendar.getInstance(TimeZone.getTimeZone(timeZone));
+    }
+
+    public static Calendar getCalendarInstance(TimeZone timeZone){
+        if(timeZone==null){
+            return Calendar.getInstance();
+        }
+        return Calendar.getInstance(timeZone);
     }
 
     /**

@@ -15,6 +15,7 @@ import com.p_v.fliexiblecalendar.R;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * @author p-v
@@ -36,17 +37,17 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
 
     public FlexibleCalendarGridAdapter(Context context, int year, int month,
-                                       boolean showDatesOutsideMonth, int startDayOfTheWeek){
+                                       boolean showDatesOutsideMonth, int startDayOfTheWeek, TimeZone timeZone){
         this.context = context;
         this.showDatesOutsideMonth = showDatesOutsideMonth;
-        initialize(year,month,startDayOfTheWeek);
+        initialize(year,month,startDayOfTheWeek,timeZone);
     }
 
-    public void initialize(int year, int month, int startDayOfTheWeek){
+    public void initialize(int year, int month, int startDayOfTheWeek, TimeZone timeZone){
         this.year = year;
         this.month = month;
         this.monthDisplayHelper = new MonthDisplayHelper(year,month,startDayOfTheWeek);
-        this.calendar = FlexibleCalendarHelper.getLocalizedCalendar(context);
+        this.calendar = FlexibleCalendarHelper.getCalendarInstance(timeZone);
     }
 
     @Override
@@ -226,6 +227,11 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     public void setFirstDayOfTheWeek(int firstDayOfTheWeek){
         monthDisplayHelper = new MonthDisplayHelper(year,month,firstDayOfTheWeek);
+        this.notifyDataSetChanged();
+    }
+
+    public void setTimeZone(TimeZone timeZone){
+        calendar = FlexibleCalendarHelper.getCalendarInstance(timeZone);
         this.notifyDataSetChanged();
     }
 
