@@ -28,6 +28,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * A Flexible calendar view
@@ -201,6 +202,11 @@ public class FlexibleCalendarView extends LinearLayout implements
      * First day of the week in the calendar
      */
     private int startDayOfTheWeek;
+
+    /**
+     * Timezone for calendar
+     */
+    private TimeZone timeZone;
 
     private int lastPosition;
 
@@ -657,7 +663,7 @@ public class FlexibleCalendarView extends LinearLayout implements
                 .getMonthDifference(displayYear, displayMonth);
 
         //current date
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = FlexibleCalendarHelper.getCalendarInstance(timeZone);
         //update selected date item
         selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
         selectedDateItem.setMonth(cal.get(Calendar.MONTH));
@@ -817,6 +823,15 @@ public class FlexibleCalendarView extends LinearLayout implements
                     .setSelectedItem(selectedDateItem, true);
         }
 
+    }
+
+    /**
+     * Set time zone for the calendar
+     * @param timeZone
+     */
+    public void setTimeZone(String timeZone){
+        this.timeZone = TimeZone.getTimeZone(timeZone);
+        monthViewPagerAdapter.setTimeZone(this.timeZone);
     }
 
 }
