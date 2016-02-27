@@ -202,7 +202,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 .getColor(R.color.action_bar_color_activity_1)));
 
         //back button color
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.left_arrow);
         upArrow.setColorFilter(getResources().getColor(R.color.title_text_color_activity_1), PorterDuff.Mode.SRC_ATOP);
         bar.setHomeAsUpIndicator(upArrow);
     }
